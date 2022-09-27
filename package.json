@@ -1,18 +1,41 @@
 {
-    "name": "express-HelloWorld",
-    "description": "Hello World Node Express web application",
-    "version": "0.0.1",
-    "private": true,
-    "dependencies": {
-        "express": "4.16.2"
-    },
-    "devDependencies": {
-        "mocha": "5.0.0",
-        "unit.js": "2.0.0",
-        "supertest": "3.0.0"
-    },
-    "scripts": {
-        "start": "node server.js",
-        "test": "mocha --recursive tests --exit"
-    }
+  "name": "eternalstore",
+  "version": "1.0.0",
+  "description": "An eternal home for all your files, easy to upload and download.",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon",
+    "frontend": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run frontend\"",
+    "build": "npm run build --prefix frontend",
+    "test": "mocha --recursive tests --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Priygupt13/EternalStore.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Priygupt13/EternalStore/issues"
+  },
+  "homepage": "https://github.com/Priygupt13/EternalStore#readme",
+  "devDependencies": {
+    "eslint": "^8.24.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.31.8",
+    "nodemon": "^2.0.20",
+    "mocha": "5.0.0",
+    "unit.js": "2.0.0",
+    "supertest": "3.0.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "express-validator": "^6.14.2"
+  }
 }

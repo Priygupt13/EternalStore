@@ -1,8 +1,7 @@
-Welcome to the AWS CodeStar sample web application
+EternalStore
 ==================================================
 
-This sample code helps get you started with a simple Express web application
-deployed by AWS Elastic Beanstalk and AWS CloudFormation.
+A one stop shop for all your files.
 
 What's Here
 -----------
