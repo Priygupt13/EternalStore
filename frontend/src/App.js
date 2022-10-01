@@ -1,9 +1,13 @@
 import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
-function App() {
-  return (
-    <div>Welcome to EternalStore where your files are safe forever.</div>
-  );
+import React, { Component } from "react";
+import Login from './components/login.component';
+
+class App extends Component {
+  render(){
+    return (<Login />);
+  }
 }
 
 export default App;
