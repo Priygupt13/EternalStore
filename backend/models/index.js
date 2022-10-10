@@ -1,6 +1,7 @@
 const config = require("../config/db.config.js");
 const Sequelize = require("sequelize");
 
+// Database connection
 const sequelize = new Sequelize(
   config.DB,
   config.USER,
@@ -19,19 +20,29 @@ const sequelize = new Sequelize(
   }
 );
 
+// DB Schema
 const db = {};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.user = require("./user.model.js")(sequelize, Sequelize);
-db.role = require("./role.model.js")(sequelize, Sequelize);
+db.user = require("./user.model")(sequelize, Sequelize);
+db.role = require("./role.model")(sequelize, Sequelize);
 
+db.file = require("./file.model")(sequelize, Sequelize);
+// A user can have multiple files
+db.user.hasMany(db.file, {
+  foreignKey: "userId"
+});
+
+// Each role can have multiple users
 db.role.belongsToMany(db.user, {
   through: "user_roles",
   foreignKey: "roleId",
   otherKey: "userId"
 });
+
+// Each user can have multiple roles
 db.user.belongsToMany(db.role, {
   through: "user_roles",
   foreignKey: "userId",
