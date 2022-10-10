@@ -1,11 +1,27 @@
+const db = require("../models");
+const File = db.file;
+
+const getPublicFileMetadata = (item) => {
+    return {
+        id: item.id,
+        name: item.name
+    };
+}
+
 // Return list of files.
 exports.getFilesForAdmin = (req, res) => {
-    res.status(200).send("All files.");
+    File.findAll().then(
+        result => {res.status(200).send(result.map(getPublicFileMetadata));}
+    );
 };
 
 // Return list of files.
 exports.getFiles = (req, res) => {
-    res.status(200).send("All files.");
+    File.findAll({
+        where: { userId: req.userId }
+    }).then(
+        result => {res.status(200).send(result.map(getPublicFileMetadata));}
+    );
 };
 
 // download files
