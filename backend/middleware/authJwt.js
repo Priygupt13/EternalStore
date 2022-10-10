@@ -12,11 +12,17 @@ verifyToken = (req, res, next) => {
     });
   }
 
-  jwt.verify(token, config.secret, (err, decoded) => {
+  jwt.verify(token, config.secret, async (err, decoded) => {
     if (err) {
       return res.status(401).send({
         error: "Unauthorized!"
       });
+    }
+
+    try{
+      await User.findByPk(decoded.id).then(user => { if(user == null){throw "Invalid token";}});
+    }catch(e){
+      return res.status(401).send({error: e});
     }
     
     // Setup user's "id" to req so that other components can access the user directly.
