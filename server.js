@@ -14,6 +14,8 @@ class Server {
 
         // Setup DB
         this.role = db.role;
+        this.user = db.user;
+        // TODO(before prod) : do not force true in prod
         db.sequelize.sync({force: true}).then(() => {
             console.log('Drop and Resync Database with { force: true }');
             this.initialize_db();
@@ -54,6 +56,12 @@ class Server {
         this.role.create({
             id: 2,
             name: "admin"
+        });
+
+        this.user.create({
+            username: "admin",
+            email: "admin@gmail.com",
+            password: "admin1234567"
         });
     }
 }
