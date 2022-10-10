@@ -42,7 +42,7 @@ exports.signup = (req, res) => {
     });
 };
 
-exports.signin = (req, res) => {
+exports.signIn = (req, res) => {
   User.findOne({
     where: {
       email: req.body.email

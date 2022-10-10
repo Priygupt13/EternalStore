@@ -2,6 +2,26 @@ const db = require("../models");
 const ROLES = db.ROLES;
 const User = db.user;
 
+const { body, validationResult } = require('express-validator')
+
+signupValidationRules = () => {
+  return [
+    body('firstname', 'first name is required').exists(),
+    body('lastname', 'last name is required').exists(),
+    body('email', 'a valid email is required').exists().isEmail(),
+    body('password', 'password should have at least 8 characters').exists().isLength({min: 8}),
+  ];
+}
+
+checkSignupValidation = (req, res, next) => {
+  const errors = validationResult(req);
+  if(!errors.isEmpty()){
+    res.status(400).send({ message: errors.array() });
+    return;
+  }
+  next();
+}
+
 checkEmailExisted = (req, res, next) => {
     // Username
     User.findOne({
@@ -32,7 +52,9 @@ checkRolesExisted = (req, res, next) => {
 
 const verifySignUp = {
   checkEmailExisted: checkEmailExisted,
-  checkRolesExisted: checkRolesExisted
+  checkRolesExisted: checkRolesExisted,
+  signupValidationRules: signupValidationRules,
+  checkSignupValidation: checkSignupValidation
 };
 
 module.exports = verifySignUp;
