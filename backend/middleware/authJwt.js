@@ -18,6 +18,8 @@ verifyToken = (req, res, next) => {
         message: "Unauthorized!"
       });
     }
+    
+    // Setup user's "id" to req so that other components can access the user directly.
     req.userId = decoded.id;
     next();
   });

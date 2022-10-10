@@ -9,11 +9,11 @@ var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
-    console.log('in auth controller');
   // Save User to Database
   // verifySignUp middleware would ensure that no same user/email already exists
   User.create({
-    username: req.body.username,
+    first_name: req.body.firstname,
+    last_name: req.body.lastname,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8)
   })
@@ -45,7 +45,7 @@ exports.signup = (req, res) => {
 exports.signin = (req, res) => {
   User.findOne({
     where: {
-      username: req.body.username
+      email: req.body.email
     }
   })
     .then(user => {
@@ -76,7 +76,6 @@ exports.signin = (req, res) => {
         }
         res.status(200).send({
           id: user.id,
-          username: user.username,
           email: user.email,
           roles: authorities,
           accessToken: token
