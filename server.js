@@ -34,7 +34,6 @@ class Server {
 
     routes() {
         require('./backend/routes/auth.routes')(this.app);
-        require('./backend/routes/user.routes')(this.app);
         require('./backend/routes/file.routes')(this.app);
         // Catch all requests that don't match any route
         /* this.app.get("*", (req, res) => {
