@@ -1,3 +1,4 @@
+const uuid = require("uuid");
 const db = require("../models");
 const config = require("../config/auth.config");
 const User = db.user;
@@ -9,9 +10,11 @@ var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
+  var _id = uuid.v4();
   // Save User to Database
   // verifySignUp middleware would ensure that no same user/email already exists
   User.create({
+    id: _id,
     first_name: req.body.firstname,
     last_name: req.body.lastname,
     email: req.body.email,
