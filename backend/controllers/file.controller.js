@@ -22,9 +22,9 @@ const getPublicFileMetadata = (item) => {
 // Return list of files.
 exports.getFilesForAdmin = (req, res) => {
     File.findAll().then(
-        result => {res.status(200).send(result.map(getPublicFileMetadata));}
+        result => { res.status(200).send(result.map(getPublicFileMetadata));}
     ).catch(
-        res.status(404).send({error: "Failed to retrieve files."})
+        err => res.status(404).send({error: "Failed to retrieve files."})
     );
 };
 
@@ -34,6 +34,8 @@ exports.getFiles = (req, res) => {
         where: { userId: req.userId }
     }).then(
         result => {res.status(200).send(result.map(getPublicFileMetadata));}
+    ).catch(
+        err => res.status(404).send({error: "Failed to retrieve files."})
     );
 };
 
@@ -92,7 +94,10 @@ exports.updateFile = async (req, res) => {
     // Ensure file exists
     File.findOne({
         where: { id: fileId }
-    }).catch(err => res.status(404).send({error: "File doesn't exist,"}));
+    }).then(result => {if(result == null){
+        throw "File doesn't exist";
+    }})
+    .catch(err => res.status(404).send({error: "File doesn't exist,"}));
 
     // Update file.
     try {
@@ -104,10 +109,9 @@ exports.updateFile = async (req, res) => {
         }
 
         // Update the DB
-        File.update({
-            id: fileId,
-            url: req.file.path
-        }).then(res.status(200).send({
+        File.update(
+            { url: req.file.path },{where: {id: fileId}}
+        ).then(res.status(200).send({
             message: "Updated the file successfully: " + req.file.originalname,
         }));
       } catch (err) {
@@ -132,12 +136,15 @@ exports.deleteFile = (req, res) => {
         where: { id: fileId }
     }).then(
         result => {
+            if(result == null){
+                throw "File doesn't exist.";
+            }
             const fileUrl = result.url;
             deleteLocalFile(fileUrl);
     }).then(
         File.destroy({where: {id: fileId}})
     ).then(
-        res.status(200).send("File deleted successfully.")
+        result => res.status(200).send("File deleted successfully.")
     ).catch(
         error => {
             res.status(404).send({ error: "Failed to delete file. Err: "  + error });
