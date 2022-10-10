@@ -33,12 +33,14 @@ class Server {
     }
 
     routes() {
+        require('./backend/routes/auth.routes')(this.app);
+        require('./backend/routes/user.routes')(this.app);
         // Catch all requests that don't match any route
-        this.app.get("*", (req, res) => {
+        /* this.app.get("*", (req, res) => {
             res.sendFile(
                 path.join(this.frontend_dir, "index.html")
             );
-        });
+        }); */
     }
 
     listen() {
@@ -56,12 +58,6 @@ class Server {
         this.role.create({
             id: 2,
             name: "admin"
-        });
-
-        this.user.create({
-            username: "admin",
-            email: "admin@gmail.com",
-            password: "admin1234567"
         });
     }
 }
