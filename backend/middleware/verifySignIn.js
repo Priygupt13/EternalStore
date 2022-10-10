@@ -10,7 +10,7 @@ signInValidationRules = () => {
 checkSignInValidation = (req, res, next) => {
   const errors = validationResult(req);
   if(!errors.isEmpty()){
-    res.status(400).send({ message: errors.array() });
+    res.status(400).send({ error: errors.array() });
     return;
   }
   next();
