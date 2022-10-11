@@ -7,5 +7,5 @@ export function capitalizeFirstLetter(str) {
 
 export function timestampToDate(timestamp) {
     var options = {  year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(parseInt(timestamp)).toLocaleDateString("en-US", options);
+    return new Date(parseInt(timestamp) * 1000).toLocaleDateString("en-US", options);
 }
