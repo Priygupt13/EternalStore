@@ -64,8 +64,9 @@ export default class BoardUser extends Component {
               <label className="btn btn-primary">Upload A File <input type="file" hidden/></label>
             </form>
           </div>
-          <div>
-            <table className="table table-bordered table-striped table-hover">
+        </header>
+        <div>
+          <table className="table table-bordered table-striped table-hover">
               <thead className="thead-dark">
                 <tr>
                   <th scope="col"  style={{ width: '20%' }}>Document Name</th>
@@ -75,8 +76,7 @@ export default class BoardUser extends Component {
               </thead>
               <FileListView files={this.state.files} />
           </table>
-          </div>
-        </header>
+        </div>
       </div>
     );
   }

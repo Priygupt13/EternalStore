@@ -58,6 +58,7 @@ export default class BoardAdmin extends Component {
       <div className="container">
         <header className="jumbotron">
           <h3>{this.state.content}</h3>
+        </header>
           <div>
             <table className="table table-bordered table-striped table-hover">
               <thead className="thead-dark">
@@ -70,7 +71,6 @@ export default class BoardAdmin extends Component {
               <FileListView files={this.state.files} />
           </table>
           </div>
-        </header>
       </div>
     );
   }
