@@ -1,14 +1,25 @@
-import { capitalizeFirstLetter } from "../common/utils";
+import { capitalizeFirstLetter, timestampToDate } from "../common/utils";
+import React from "react";
 
-function FileView(props){
-    return (
-        <tr className="content_border">
-             <td>{props.file.name}</td>
-             <td>{capitalizeFirstLetter(props.file.ownerFirstName) + " " + capitalizeFirstLetter(props.file.ownerLastName)}</td>
-             <td>{props.file.updateTimestamp}</td>
-             <td></td>
-        </tr>
-    );
+class FileView extends React.Component {
+    constructor(props) {
+        super(props);
+        this.name = props.file.name;
+        this.id = props.file.id;
+        this.updateTimestamp = timestampToDate(props.file.updateTimestamp);
+        this.owner = capitalizeFirstLetter(props.file.ownerFirstName) + " " + capitalizeFirstLetter(props.file.ownerLastName);
+    }
+
+    render(){
+        return (
+            <tr className="content_border">
+                 <td>{this.name}</td>
+                 <td>{this.owner}</td>
+                 <td>{this.updateTimestamp}</td>
+                 <td></td>
+            </tr>
+        );
+    }
 }
 
 export function FileListView(props){
