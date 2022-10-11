@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import UserService from "../services/user.service";
 import EventBus from "../common/EventBus";
+import { compareFileUpdateTime } from "../common/userFileUtils";
 
 export default class BoardUser extends Component {
   constructor(props) {
@@ -17,7 +18,8 @@ export default class BoardUser extends Component {
     UserService.getUserBoard().then(
       response => {
         this.setState({
-          files: response.data
+          // store file in order of their update time.
+          files: response.data.sort(compareFileUpdateTime).reverse()
         });
       },
       error => {
@@ -62,6 +64,7 @@ export default class BoardUser extends Component {
                 <tr>
                  <td>{file.name}</td>
                  <td>{file.updateTimestamp}</td>
+                 <td></td>
                 </tr>)}
             </tbody>
           </table>
