@@ -1,8 +1,10 @@
+import { capitalizeFirstLetter } from "../common/utils";
+
 function FileView(props){
     return (
         <tr className="content_border">
              <td>{props.file.name}</td>
-             <td>me</td>
+             <td>{capitalizeFirstLetter(props.file.ownerFirstName) + " " + capitalizeFirstLetter(props.file.ownerLastName)}</td>
              <td>{props.file.updateTimestamp}</td>
              <td></td>
         </tr>
