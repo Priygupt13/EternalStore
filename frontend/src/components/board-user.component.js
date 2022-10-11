@@ -36,7 +36,9 @@ export default class BoardUser extends Component {
         this.fetchData();
       },
       error => {
-        toast.error(fileName + " upload failed!");
+        var message = ( error.response && error.response.data && error.response.data.error ) 
+                      || error.response.data.error || fileName + " upload failed!";
+        toast.error(message);
       }
     );
   }
