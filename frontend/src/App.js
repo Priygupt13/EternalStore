@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 import AuthService from "./services/auth.service";
 
@@ -110,6 +112,17 @@ class App extends Component {
         </nav>
 
         <div className="container mt-3">
+          <ToastContainer
+            position="top-right"
+            autoClose={1000}
+            hideProgressBar={false}
+            newestOnTop={true}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"/>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />

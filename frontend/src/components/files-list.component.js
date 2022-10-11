@@ -1,5 +1,6 @@
 import { capitalizeFirstLetter, timestampToDate } from "../common/utils";
 import React from "react";
+import { toast } from "react-toastify";
 
 // Icons
 import delete_icon from "./delete_icon.png";
@@ -16,15 +17,15 @@ class FileView extends React.Component {
     }
 
     handleDelete(){
-
+        toast(this.name + " deleted!");
     }
 
     handleEdit(){
-
+        toast(this.name + " edited!");
     }
 
     handleDownload(){
-
+        toast(this.name + " downloaded!");
     }
 
     render(){
