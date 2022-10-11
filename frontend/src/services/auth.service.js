@@ -12,10 +12,10 @@ class AuthService {
     this.local_storage_key = "user";
   }
 
-  login(username, password) {
+  login(email, password) {
     return axios
       .post(this.sign_in_url, {
-        username,
+        email,
         password
       })
       .then(response => {
