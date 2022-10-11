@@ -61,15 +61,13 @@ export default class BoardUser extends Component {
 
     return (
       <div className="container">
-        <header className="jumbotron">
+        <header className="jumbotron content_border">
           <div>
-            <h2>Hello There!</h2>
-            <h3>{this.state.content}</h3>
-          </div>
-          <div>
-            <form enctype="multipart/form-data" method="post">
+            <h2 className="inline_text">Hello There!</h2>
+            <form enctype="multipart/form-data" method="post" class="upload_file_form">
               <label className="btn btn-primary">Upload A File <input type="file" hidden/></label>
             </form>
+            <h3>{this.state.content}</h3>
           </div>
         </header>
         <div>
