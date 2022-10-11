@@ -3,6 +3,7 @@ const { deleteLocalFile } = require("../util/file.local")
 const uploadFile = require("../middleware/localUpload");
 const db = require("../models");
 const File = db.file;
+const User = db.user;
 
 
 const  getFileUpdateTimestamp = (item) => {
@@ -11,17 +12,22 @@ const  getFileUpdateTimestamp = (item) => {
 }
 
 const getPublicFileMetadata = (item) => {
+    console.log(item);
     return {
         id: item.id,
         name: item.name,
         url: item.url,
-        update_timestamp: getFileUpdateTimestamp(item)
+        updateTimestamp: getFileUpdateTimestamp(item),
+        ownerFirstName: item.user.first_name,
+        ownerLastName: item.user.last_name
     };
 }
 
 // Return list of files.
 exports.getFilesForAdmin = (req, res) => {
-    File.findAll().then(
+    File.findAll({
+        include: User
+    }).then(
         result => { res.status(200).send(result.map(getPublicFileMetadata));}
     ).catch(
         err => res.status(404).send({error: "Failed to retrieve files."})
@@ -31,11 +37,12 @@ exports.getFilesForAdmin = (req, res) => {
 // Return list of files.
 exports.getFiles = (req, res) => {
     File.findAll({
-        where: { userId: req.userId }
+        where: { userId: req.userId },
+        include: User
     }).then(
         result => {res.status(200).send(result.map(getPublicFileMetadata));}
     ).catch(
-        err => res.status(404).send({error: "Failed to retrieve files."})
+        err => res.status(404).send({error: "Failed to retrieve files." + err})
     );
 };
 

@@ -34,6 +34,7 @@ db.file = require("./file.model")(sequelize, Sequelize);
 db.user.hasMany(db.file, {
   foreignKey: "userId"
 });
+db.file.belongsTo(db.user);
 
 // Each role can have multiple users
 db.role.belongsToMany(db.user, {
