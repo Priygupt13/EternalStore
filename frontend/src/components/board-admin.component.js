@@ -62,18 +62,12 @@ export default class BoardAdmin extends Component {
             <h3>{this.state.content}</h3>
           </div>
         </header>
-          <div>
-            <table className="table table-bordered table-striped table-hover">
-              <thead className="thead-dark">
-                <tr>
-                  <th scope="col"  style={{ width: '20%' }}>Document Name</th>
-                  <th scope="col" style={{ width: '15%' }}>Last Modified</th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              <FileListView files={this.state.files} />
-          </table>
+        <div>
+          <div className="content_border my_drive_header">
+            Files
           </div>
+          <FileListView files={this.state.files} />
+        </div>
       </div>
     );
   }

@@ -64,23 +64,17 @@ export default class BoardUser extends Component {
         <header className="jumbotron content_border">
           <div>
             <h2 className="inline_text">Hello There!</h2>
-            <form enctype="multipart/form-data" method="post" class="upload_file_form">
-              <label className="btn btn-primary">Upload A File <input type="file" hidden/></label>
-            </form>
             <h3>{this.state.content}</h3>
           </div>
         </header>
         <div>
-          <table className="table table-bordered table-striped table-hover">
-              <thead className="thead-dark">
-                <tr>
-                  <th scope="col"  style={{ width: '20%' }}>Document Name</th>
-                  <th scope="col" style={{ width: '15%' }}>Last Modified</th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              <FileListView files={this.state.files} />
-          </table>
+          <div className="content_border my_drive_header">
+            My Drive
+            <form enctype="multipart/form-data" method="post" class="upload_file_form">
+              <label className="btn btn-primary">Upload A File <input type="file" hidden/></label>
+            </form>
+          </div>
+          <FileListView files={this.state.files} />
         </div>
       </div>
     );

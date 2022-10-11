@@ -1,7 +1,8 @@
 function FileView(props){
     return (
-        <tr>
+        <tr className="content_border">
              <td>{props.file.name}</td>
+             <td>me</td>
              <td>{props.file.updateTimestamp}</td>
              <td></td>
         </tr>
@@ -10,10 +11,20 @@ function FileView(props){
 
 export function FileListView(props){
     return (
-        <tbody>
-            {props.files && props.files.map(
-              (file, index) => <FileView file={ file } />
-            )}
-        </tbody>
+        <table className="table table-hover">
+            <thead className="thead-dark">
+                <tr>
+                    <th scope="col"  style={{ width: '35%' }}>Name</th>
+                    <th scope="col"  style={{ width: '20%' }}>Owner</th>
+                    <th scope="col" style={{ width: '20%' }}>Last Modified</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {props.files && props.files.map(
+                    (file, index) => <FileView file={ file } />
+                 )}
+            </tbody>
+        </table>
     );
 }

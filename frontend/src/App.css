@@ -28,7 +28,7 @@ label {
   height: 100%;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
-  width: 700px;
+  width: 800px;
   margin: auto;
 }
 
@@ -78,4 +78,14 @@ label {
 
 .inline_text {
   display: inline;
+}
+
+.my_drive_header {
+  height: 45px;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+label {
+  margin: 0px;
 }
