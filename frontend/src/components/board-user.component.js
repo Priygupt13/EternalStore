@@ -12,6 +12,8 @@ export default class BoardUser extends Component {
   constructor(props) {
     super(props);
 
+    this.handler = this.handler.bind(this);
+
     this.state = {
       redirect: null,
       content: "",
@@ -20,16 +22,11 @@ export default class BoardUser extends Component {
     };
   }
 
-  componentDidMount() {
-    const currentUser = AuthService.getCurrentUser();
-    if(!currentUser){
-      this.setState({redirect: "/home"});
-      return;
-    }
-    this.setState({
-      user: currentUser
-    });
+  handler() {
+    this.fetchData();
+  }
 
+  fetchData() {
     UserService.getUserBoard().then(
       response => {
         this.setState({
@@ -54,6 +51,19 @@ export default class BoardUser extends Component {
     );
   }
 
+  componentDidMount() {
+    const currentUser = AuthService.getCurrentUser();
+    if(!currentUser){
+      this.setState({redirect: "/home"});
+      return;
+    }
+    this.setState({
+      user: currentUser
+    });
+
+    this.fetchData();
+  }
+
   render() {
     if (this.state.redirect) {
       return <Navigate to={this.state.redirect} />
@@ -74,7 +84,7 @@ export default class BoardUser extends Component {
               <label className="btn btn-primary">Upload A File <input type="file" hidden/></label>
             </form>
           </div>
-          <FileListView files={this.state.files} />
+          <FileListView files={this.state.files} handler={this.handler} />
         </div>
       </div>
     );

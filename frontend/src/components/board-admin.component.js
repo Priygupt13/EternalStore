@@ -11,6 +11,8 @@ export default class BoardAdmin extends Component {
   constructor(props) {
     super(props);
 
+    this.handler = this.handler.bind(this);
+
     this.state = {
       redirect: null,
       content: "",
@@ -18,13 +20,11 @@ export default class BoardAdmin extends Component {
     };
   }
 
-  componentDidMount() {
-    const currentUser = AuthService.getCurrentUser();
-    if(!currentUser){
-      this.setState({redirect: "/home"});
-      return;
-    }
+  handler() {
+    this.fetchData();
+  }
 
+  fetchData() {
     UserService.getAdminBoard().then(
       response => {
         this.setState({
@@ -49,6 +49,15 @@ export default class BoardAdmin extends Component {
     );
   }
 
+  componentDidMount() {
+    const currentUser = AuthService.getCurrentUser();
+    if(!currentUser){
+      this.setState({redirect: "/home"});
+      return;
+    }
+    this.fetchData();
+  }
+
   render() {
     if (this.state.redirect) {
       return <Navigate to={this.state.redirect} />
@@ -66,7 +75,7 @@ export default class BoardAdmin extends Component {
           <div className="content_border my_drive_header">
             Files
           </div>
-          <FileListView files={this.state.files} />
+          <FileListView files={this.state.files} handler={this.handler} />
         </div>
       </div>
     );

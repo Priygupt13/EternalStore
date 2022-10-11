@@ -10,6 +10,7 @@ import edit_icon from "./edit_icon.png";
 class FileView extends React.Component {
     constructor(props) {
         super(props);
+        this.parentHandler = props.handler;
         this.name = props.file.name;
         this.id = props.file.id;
         this.updateTimestamp = timestampToDate(props.file.updateTimestamp);
@@ -18,14 +19,17 @@ class FileView extends React.Component {
 
     handleDelete(){
         toast(this.name + " deleted!");
+        this.parentHandler();
     }
 
     handleEdit(){
         toast(this.name + " edited!");
+        this.parentHandler();
     }
 
     handleDownload(){
         toast(this.name + " downloaded!");
+        this.parentHandler();
     }
 
     render(){
@@ -66,7 +70,7 @@ export function FileListView(props){
             </thead>
             <tbody>
                 {props.files && props.files.map(
-                    (file, index) => <FileView file={ file } />
+                    (file, index) => <FileView file={ file } handler={ props.handler } />
                  )}
             </tbody>
         </table>
