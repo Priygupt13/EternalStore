@@ -31,9 +31,10 @@ class AuthService {
     localStorage.removeItem(this.local_storage_key);
   }
 
-  register(username, email, password) {
+  register(firstname, lastname, email, password) {
     return axios.post(this.sign_up_url, {
-      username,
+      firstname,
+      lastname,
       email,
       password
     });
