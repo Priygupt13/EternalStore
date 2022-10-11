@@ -2,6 +2,8 @@ import { capitalizeFirstLetter, timestampToDate } from "../common/utils";
 import React from "react";
 import { toast } from "react-toastify";
 
+import UserService from "../services/user.service";
+
 // Icons
 import delete_icon from "./delete_icon.png";
 import download_icon from "./download_icon.png";
@@ -19,8 +21,15 @@ class FileView extends React.Component {
     }
 
     handleDelete(){
-        toast.success(this.name + " deleted!");
-        this.parentHandler();
+        UserService.deleteFile(this.id).then(
+            response => {
+                toast.success(this.name + " deleted!");
+                this.parentHandler();
+            },
+            error => {
+                toast.error(this.name + " deletion failed.");
+            }
+        );
     }
 
     handleEdit(){

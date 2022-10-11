@@ -10,11 +10,11 @@ class UserService {
     // Supported Method: REST.GET
     this.admin_dashboard_url = API_URL + "/file/admin/list";
     // Supported Method: REST.POST
-    this.file_create_url = API_URL + "/api/file/create";
+    this.file_create_url = API_URL + "/file/create";
     // Supported Method: REST.POST
-    this.file_update_url = API_URL + "/api/file/update/";
+    this.file_update_url = API_URL + "/file/update/";
     // Supported Method: REST.DELETE
-    this.file_delete_url = API_URL + "/api/file/";
+    this.file_delete_url = API_URL + "/file/";
   }
 
   getPublicContent() {
@@ -27,6 +27,10 @@ class UserService {
 
   getAdminBoard() {
     return axios.get(this.admin_dashboard_url, { headers: authHeader() });
+  }
+
+  deleteFile(fileId) {
+    return axios.delete(this.file_delete_url + fileId, { headers: authHeader() })
   }
 }
 
