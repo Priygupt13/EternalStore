@@ -94,6 +94,8 @@ class Login extends Component {
 
   render() {
     return (
+      <div>
+      <div className="text-center"><p className="display-6">Sign in to continue to EternalStore!</p></div>
       <div className="col-md-12">
         <div className="card card-container">
           <img
@@ -159,7 +161,7 @@ class Login extends Component {
             />
           </Form>
         </div>
-      </div>
+      </div></div>
     );
   }
 }

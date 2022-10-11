@@ -121,6 +121,8 @@ class Register extends Component {
 
   render() {
     return (
+      <div>
+        <div className="text-center"><p className="display-6">Try EternalStore For Free!</p></div>
       <div className="col-md-12">
         <div className="card card-container">
           <img
@@ -213,7 +215,7 @@ class Register extends Component {
             />
           </Form>
         </div>
-      </div>
+      </div></div>
     );
   }
 }
