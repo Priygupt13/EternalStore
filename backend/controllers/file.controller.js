@@ -79,7 +79,7 @@ exports.createFile = async (req, res) => {
         }));
         } catch (err) {
             if (err.code == "LIMIT_FILE_SIZE") {
-                return res.status(500).send({ error: "File size cannot be larger than 2MB!" });
+                return res.status(500).send({ error: "File size cannot be larger than 10MB!" });
             }
             
             res.status(500).send({error: `Could not upload the file: ${req.file.originalname}. ${err}`});
@@ -123,7 +123,7 @@ exports.updateFile = async (req, res) => {
     
         if (err.code == "LIMIT_FILE_SIZE") {
           return res.status(500).send({
-            message: "File size cannot be larger than 2MB!",
+            message: "File size cannot be larger than 10MB!",
           });
         }
     
