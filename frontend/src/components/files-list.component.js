@@ -13,6 +13,7 @@ class FileView extends React.Component {
         this.parentHandler = props.handler;
         this.name = props.file.name;
         this.id = props.file.id;
+        this.downloadUrl = props.file.url;
         this.updateTimestamp = timestampToDate(props.file.updateTimestamp);
         this.owner = capitalizeFirstLetter(props.file.ownerFirstName) + " " + capitalizeFirstLetter(props.file.ownerLastName);
     }
@@ -27,10 +28,6 @@ class FileView extends React.Component {
         this.parentHandler();
     }
 
-    handleDownload(){
-        toast.success(this.name + " downloaded!");
-    }
-
     render(){
         return (
             <tr className="content_border">
@@ -42,10 +39,10 @@ class FileView extends React.Component {
                             type="submit"
                             style={{ backgroundImage: `url(${delete_icon})`}}
                             onClick={() => this.handleDelete()} />
-                    <button className="file_op_btn"
-                            type="submit"
-                            style={{ backgroundImage: `url(${download_icon})`}}
-                            onClick={() => this.handleDownload()} />
+                    <a className="file_op_btn"
+                        href={this.downloadUrl} 
+                        download={this.name}
+                        style={{ backgroundImage: `url(${download_icon})`}} />
                     <button className="file_op_btn"
                             type="submit"
                             style={{ backgroundImage: `url(${edit_icon})`}}

@@ -87,6 +87,7 @@ label {
 }
 
 .file_op_btn {
+  display: block;
   border: none;
   float: right;
   height: 30px;
