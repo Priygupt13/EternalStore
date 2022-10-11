@@ -7,6 +7,7 @@ import AuthService from "../services/auth.service";
 import { Navigate } from "react-router-dom";
 import { FileListView } from "./files-list.component";
 import { toast } from "react-toastify";
+import { capitalizeFirstLetter } from "../common/utils";
 
 
 export default class BoardUser extends Component {
@@ -41,6 +42,12 @@ export default class BoardUser extends Component {
         toast.error(message);
       }
     );
+  }
+
+  getUserName() {
+    return this.state.user 
+          ? capitalizeFirstLetter(this.state.user.firstName) + " " + capitalizeFirstLetter(this.state.user.lastName)
+          : "Guest";
   }
 
   fetchData() {
@@ -90,7 +97,7 @@ export default class BoardUser extends Component {
       <div className="container">
         <header className="jumbotron content_border">
           <div>
-            <h2 className="inline_text">Hello There!</h2>
+            <h2 className="inline_text">Hello {this.getUserName()}!</h2>
             <h3>{this.state.content}</h3>
           </div>
         </header>
