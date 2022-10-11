@@ -8,7 +8,8 @@ export default class BoardUser extends Component {
     super(props);
 
     this.state = {
-      content: ""
+      content: "",
+      files: []
     };
   }
 
@@ -16,7 +17,7 @@ export default class BoardUser extends Component {
     UserService.getUserBoard().then(
       response => {
         this.setState({
-          content: response.data
+          files: response.data
         });
       },
       error => {
@@ -41,6 +42,30 @@ export default class BoardUser extends Component {
       <div className="container">
         <header className="jumbotron">
           <h3>{this.state.content}</h3>
+          <div>
+            <form enctype="multipart/form-data" method="post">
+              <label className="btn btn-primary">Upload A File <input type="file" hidden/></label>
+            </form>
+          </div>
+          <div>
+            <table className="table table-bordered table-striped table-hover">
+              <thead className="thead-dark">
+                <tr>
+                  <th scope="col"  style={{ width: '20%' }}>Document Name</th>
+                  <th scope="col" style={{ width: '15%' }}>Last Modified</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+            <tbody>
+            {this.state.files && this.state.files.map(
+              (file, index) => 
+                <tr>
+                 <td>{file.name}</td>
+                 <td>{file.updateTimestamp}</td>
+                </tr>)}
+            </tbody>
+          </table>
+          </div>
         </header>
       </div>
     );
