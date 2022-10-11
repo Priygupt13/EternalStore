@@ -86,12 +86,15 @@ exports.updateFile = async (req, res) => {
     req.fileId = fileId;
 
     // Ensure file exists
-    File.findOne({
-        where: { id: fileId }
-    }).then(result => {if(result == null){
-        throw "File doesn't exist";
-    }})
-    .catch(err => res.status(404).send({error: "File doesn't exist,"}));
+    try{
+        await File.findOne({
+            where: { id: fileId }
+        }).then(result => {if(result == null){
+            throw "File doesn't exist";
+        }});
+    }catch(err){
+        return res.status(404).send({error: err});
+    }
 
     // Update file.
     try {
