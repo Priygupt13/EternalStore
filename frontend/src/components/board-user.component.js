@@ -5,6 +5,7 @@ import EventBus from "../common/EventBus";
 import { compareFileUpdateTime } from "../common/userFileUtils";
 import AuthService from "../services/auth.service";
 import { Navigate } from "react-router-dom";
+import { FileListView } from "./files-list.component";
 
 
 export default class BoardUser extends Component {
@@ -72,15 +73,7 @@ export default class BoardUser extends Component {
                   <th scope="col"></th>
                 </tr>
               </thead>
-            <tbody>
-            {this.state.files && this.state.files.map(
-              (file, index) => 
-                <tr>
-                 <td>{file.name}</td>
-                 <td>{file.updateTimestamp}</td>
-                 <td></td>
-                </tr>)}
-            </tbody>
+              <FileListView files={this.state.files} />
           </table>
           </div>
         </header>
