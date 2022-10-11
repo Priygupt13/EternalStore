@@ -29,7 +29,6 @@ class FileView extends React.Component {
 
     handleDownload(){
         toast(this.name + " downloaded!");
-        this.parentHandler();
     }
 
     render(){
