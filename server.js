@@ -16,10 +16,11 @@ class Server {
         this.role = db.role;
         this.user = db.user;
         // TODO(before prod) : do not force true in prod
-        db.sequelize.sync({force: true}).then(() => {
+        /* db.sequelize.sync({force: true}).then(() => {
             console.log('Drop and Resync Database with { force: true }');
             this.initialize_db();
-        });
+        });*/
+        db.sequelize.sync();
 
         this.middlewares();
         this.routes();
