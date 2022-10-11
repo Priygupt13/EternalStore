@@ -1,14 +1,15 @@
 import axios from "axios";
-
-const API_URL = "http://localhost:8080/api/auth/";
+import { API_URL } from "../common/const";
 
 // It handles user authentication.
 // Once authenticated, the user information is saved in local storage is "field:user"
 class AuthService {
   constructor(){
-        this.sign_in_url = API_URL + "signin";
-        this.sign_up_url = API_URL + "signup";
-        this.local_storage_key = "user";
+    // Supported Method: REST.POST
+    this.sign_in_url = API_URL + "/auth/signin";
+    // Supported Method: REST.POST
+    this.sign_up_url = API_URL + "/auth/signup";
+    this.local_storage_key = "user";
   }
 
   login(username, password) {

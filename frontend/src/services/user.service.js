@@ -1,13 +1,20 @@
 import axios from 'axios';
 import authHeader from './auth-header';
-
-const API_URL = 'http://localhost:8080/api/';
+import { API_URL } from '../common/const';
 
 class UserService {
   constructor(){
-    this.public_content_url = API_URL + "all";
-    this.user_board_url = API_URL + "user";
-    this.admin_dashboard_url = API_URL + "admin";
+    this.public_content_url = API_URL + "/all";
+    // Supported Method: REST.GET
+    this.user_board_url = API_URL + "/file/list";
+    // Supported Method: REST.GET
+    this.admin_dashboard_url = API_URL + "/file/admin/list";
+    // Supported Method: REST.POST
+    this.file_create_url = API_URL + "/api/file/create";
+    // Supported Method: REST.POST
+    this.file_update_url = API_URL + "/api/file/update/";
+    // Supported Method: REST.DELETE
+    this.file_delete_url = API_URL + "/api/file/";
   }
 
   getPublicContent() {
