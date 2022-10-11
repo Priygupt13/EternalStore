@@ -1,6 +1,11 @@
 import { capitalizeFirstLetter, timestampToDate } from "../common/utils";
 import React from "react";
 
+// Icons
+import delete_icon from "./delete_icon.png";
+import download_icon from "./download_icon.png";
+import edit_icon from "./edit_icon.png";
+
 class FileView extends React.Component {
     constructor(props) {
         super(props);
@@ -10,13 +15,38 @@ class FileView extends React.Component {
         this.owner = capitalizeFirstLetter(props.file.ownerFirstName) + " " + capitalizeFirstLetter(props.file.ownerLastName);
     }
 
+    handleDelete(){
+
+    }
+
+    handleEdit(){
+
+    }
+
+    handleDownload(){
+
+    }
+
     render(){
         return (
             <tr className="content_border">
                  <td>{this.name}</td>
                  <td>{this.owner}</td>
                  <td>{this.updateTimestamp}</td>
-                 <td></td>
+                 <td>
+                    <button className="file_op_btn"
+                            type="submit"
+                            style={{ backgroundImage: `url(${delete_icon})`}}
+                            onClick={() => this.handleDelete()} />
+                    <button className="file_op_btn"
+                            type="submit"
+                            style={{ backgroundImage: `url(${download_icon})`}}
+                            onClick={() => this.handleDownload()} />
+                    <button className="file_op_btn"
+                            type="submit"
+                            style={{ backgroundImage: `url(${edit_icon})`}}
+                            onClick={() => this.handleEdit()} />
+                 </td>
             </tr>
         );
     }
