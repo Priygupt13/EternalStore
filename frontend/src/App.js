@@ -58,7 +58,7 @@ class App extends Component {
 
     return (
       <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <nav className="navbar navbar-expand navbar-dark bg-primary">
           <Link to={"/"} className="navbar-brand">
             EternalStore
           </Link>
