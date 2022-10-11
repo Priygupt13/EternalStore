@@ -18,17 +18,17 @@ class FileView extends React.Component {
     }
 
     handleDelete(){
-        toast(this.name + " deleted!");
+        toast.success(this.name + " deleted!");
         this.parentHandler();
     }
 
     handleEdit(){
-        toast(this.name + " edited!");
+        toast.success(this.name + " edited!");
         this.parentHandler();
     }
 
     handleDownload(){
-        toast(this.name + " downloaded!");
+        toast.success(this.name + " downloaded!");
     }
 
     render(){
