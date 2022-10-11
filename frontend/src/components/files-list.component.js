@@ -28,7 +28,7 @@ class FileView extends React.Component {
                 this.parentHandler();
             },
             error => {
-                toast.error(this.name + " deletion failed.");
+                toast.error(this.name + " deletion failed!");
             }
         );
     }
@@ -40,7 +40,9 @@ class FileView extends React.Component {
                 this.parentHandler();
             },
             error => {
-                toast.error(this.name + " edit failed.");
+                var message = ( error.response && error.response.data && error.response.data.error ) 
+                      || error.response.data.error || this.name + " edit failed!";
+                toast.error(message);
             }
         );
     }
