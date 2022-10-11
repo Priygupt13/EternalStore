@@ -15,7 +15,8 @@ export default class BoardUser extends Component {
     this.state = {
       redirect: null,
       content: "",
-      files: []
+      files: [],
+      user: null
     };
   }
 
@@ -25,6 +26,9 @@ export default class BoardUser extends Component {
       this.setState({redirect: "/home"});
       return;
     }
+    this.setState({
+      user: currentUser
+    });
 
     UserService.getUserBoard().then(
       response => {
@@ -58,7 +62,10 @@ export default class BoardUser extends Component {
     return (
       <div className="container">
         <header className="jumbotron">
-          <h3>{this.state.content}</h3>
+          <div>
+            <h2>Hello There!</h2>
+            <h3>{this.state.content}</h3>
+          </div>
           <div>
             <form enctype="multipart/form-data" method="post">
               <label className="btn btn-primary">Upload A File <input type="file" hidden/></label>

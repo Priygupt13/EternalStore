@@ -57,7 +57,10 @@ export default class BoardAdmin extends Component {
     return (
       <div className="container">
         <header className="jumbotron">
-          <h3>{this.state.content}</h3>
+          <div>
+            <h2>Admin Board!</h2>
+            <h3>{this.state.content}</h3>
+          </div>
         </header>
           <div>
             <table className="table table-bordered table-striped table-hover">
