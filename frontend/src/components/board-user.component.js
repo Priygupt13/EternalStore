@@ -6,6 +6,7 @@ import { compareFileUpdateTime } from "../common/userFileUtils";
 import AuthService from "../services/auth.service";
 import { Navigate } from "react-router-dom";
 import { FileListView } from "./files-list.component";
+import { toast } from "react-toastify";
 
 
 export default class BoardUser extends Component {
@@ -13,6 +14,7 @@ export default class BoardUser extends Component {
     super(props);
 
     this.handler = this.handler.bind(this);
+    this.createHandler = this.createHandler.bind(this);
 
     this.state = {
       redirect: null,
@@ -24,6 +26,19 @@ export default class BoardUser extends Component {
 
   handler() {
     this.fetchData();
+  }
+
+  createHandler(e) {
+    const fileName = e.target.files[0].name;
+    UserService.createFile(e.target.files[0]).then(
+      response => {
+        toast.success(fileName + " uploaded!");
+        this.fetchData();
+      },
+      error => {
+        toast.error(fileName + " upload failed!");
+      }
+    );
   }
 
   fetchData() {
@@ -80,11 +95,13 @@ export default class BoardUser extends Component {
         <div>
           <div className="content_border my_drive_header">
             My Drive
-            <form enctype="multipart/form-data" method="post" class="upload_file_form">
-              <label className="btn btn-primary">Upload A File <input type="file" hidden/></label>
+            <form enctype="multipart/form-data" class="upload_file_form">
+              <label for="file_create_btn" className="btn btn-primary">File Upload
+                <input id="file_create_btn" type="file" hidden  onChange={this.createHandler}/>
+              </label>
             </form>
           </div>
-          <FileListView files={this.state.files} handler={this.handler} />
+          <FileListView files={this.state.files} handler={this.handler}/>
         </div>
       </div>
     );
