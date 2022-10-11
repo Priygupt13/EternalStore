@@ -1,5 +1,5 @@
 import axios from 'axios';
-import authHeader from './auth-header';
+import { authHeader, fileUploadHeader } from './auth-header';
 import { API_URL } from '../common/const';
 
 class UserService {
@@ -31,6 +31,20 @@ class UserService {
 
   deleteFile(fileId) {
     return axios.delete(this.file_delete_url + fileId, { headers: authHeader() })
+  }
+
+  createFile(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('fileName', file.name);
+    return axios.post(this.file_create_url, formData, { headers: fileUploadHeader() })
+  }
+
+  changeFile(fileId, file){
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('fileName', file.name);
+    return axios.post(this.file_update_url + fileId, formData, { headers: fileUploadHeader() })
   }
 }
 

@@ -13,6 +13,7 @@ class FileView extends React.Component {
     constructor(props) {
         super(props);
         this.parentHandler = props.handler;
+        this.uploadHandler = this.handleEdit.bind(this);
         this.name = props.file.name;
         this.id = props.file.id;
         this.downloadUrl = props.file.url;
@@ -20,7 +21,7 @@ class FileView extends React.Component {
         this.owner = capitalizeFirstLetter(props.file.ownerFirstName) + " " + capitalizeFirstLetter(props.file.ownerLastName);
     }
 
-    handleDelete(){
+    handleDelete(e){
         UserService.deleteFile(this.id).then(
             response => {
                 toast.success(this.name + " deleted!");
@@ -32,9 +33,16 @@ class FileView extends React.Component {
         );
     }
 
-    handleEdit(){
-        toast.success(this.name + " edited!");
-        this.parentHandler();
+    handleEdit(e){
+        UserService.changeFile(this.id, e.target.files[0]).then(
+            response => {
+                toast.success(this.name + " edited!");
+                this.parentHandler();
+            },
+            error => {
+                toast.error(this.name + " edit failed.");
+            }
+        );
     }
 
     render(){
@@ -52,10 +60,12 @@ class FileView extends React.Component {
                         href={this.downloadUrl} 
                         download={this.name}
                         style={{ backgroundImage: `url(${download_icon})`}} />
-                    <button className="file_op_btn"
-                            type="submit"
-                            style={{ backgroundImage: `url(${edit_icon})`}}
-                            onClick={() => this.handleEdit()} />
+                    <form enctype="multipart/form-data">
+                    <label for="file_update_btn" className="file_op_btn upload_label"
+                        style={{ backgroundImage: `url(${edit_icon})`}}>
+                            <input id="file_update_btn" type="file" hidden onChange={this.uploadHandler}/>
+                    </label></form>
+                    
                  </td>
             </tr>
         );

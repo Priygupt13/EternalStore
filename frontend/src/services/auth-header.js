@@ -1,5 +1,5 @@
 // Returns http header field for session management.
-function authHeader() {
+export function authHeader() {
     const user = JSON.parse(localStorage.getItem('user'));
   
     if (user && user.accessToken) {
@@ -9,4 +9,12 @@ function authHeader() {
     }
 }
 
-export default authHeader;
+export function fileUploadHeader() {
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  if (user && user.accessToken) {
+    return { 'x-access-token': user.accessToken, 'content-type': 'multipart/form-data' };
+  } else {
+    return {};
+  }
+}

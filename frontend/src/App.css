@@ -99,3 +99,7 @@ label {
 label {
   margin: 0px;
 }
+
+.upload_label {
+  cursor: pointer;
+}
