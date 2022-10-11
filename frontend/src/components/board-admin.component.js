@@ -2,8 +2,10 @@ import React, { Component } from "react";
 
 import UserService from "../services/user.service";
 import EventBus from "../common/EventBus";
+import { compareFileUpdateTime } from "../common/userFileUtils";
 import AuthService from "../services/auth.service";
 import { Navigate } from "react-router-dom";
+import { FileListView } from "./files-list.component";
 
 export default class BoardAdmin extends Component {
   constructor(props) {
@@ -11,7 +13,8 @@ export default class BoardAdmin extends Component {
 
     this.state = {
       redirect: null,
-      content: ""
+      content: "",
+      files: []
     };
   }
 
@@ -25,7 +28,8 @@ export default class BoardAdmin extends Component {
     UserService.getAdminBoard().then(
       response => {
         this.setState({
-          content: response.data
+          // store file in order of their update time.
+          files: response.data.sort(compareFileUpdateTime).reverse()
         });
       },
       error => {
@@ -54,6 +58,18 @@ export default class BoardAdmin extends Component {
       <div className="container">
         <header className="jumbotron">
           <h3>{this.state.content}</h3>
+          <div>
+            <table className="table table-bordered table-striped table-hover">
+              <thead className="thead-dark">
+                <tr>
+                  <th scope="col"  style={{ width: '20%' }}>Document Name</th>
+                  <th scope="col" style={{ width: '15%' }}>Last Modified</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <FileListView files={this.state.files} />
+          </table>
+          </div>
         </header>
       </div>
     );
