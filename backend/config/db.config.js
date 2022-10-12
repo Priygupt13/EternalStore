@@ -1,7 +1,10 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
 module.exports = {
-  HOST: "localhost",
-  USER: "root",
-  PASSWORD: "123456",
+  HOST: process.env.AWS_DB_HOST || "localhost",
+  USER: process.env.AWS_DB_USER || "root",
+  PASSWORD: process.env.AWS_DB_PASSWORD || "123456",
   DB: "eternal_code",
   dialect: "mysql",
   pool: {
