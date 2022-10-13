@@ -79,9 +79,9 @@ export function FileListView(props){
         <table className="table table-hover">
             <thead className="thead-dark">
                 <tr>
-                    <th scope="col"  style={{ width: '35%' }}>Name</th>
+                    <th scope="col"  style={{ width: '30%' }}>Name</th>
                     <th scope="col"  style={{ width: '20%' }}>Owner</th>
-                    <th scope="col" style={{ width: '20%' }}>Last Modified</th>
+                    <th scope="col" style={{ width: '25%' }}>Last Modified</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
